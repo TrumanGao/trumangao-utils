@@ -2,6 +2,7 @@ import vueLog from "./components/vue-log.vue";
 // 给组件配置 install 方法
 vueLog.install = Vue => {
   Vue.component(vueLog.name, vueLog);
+  console.log("给组件配置 install 方法", vueLog);
 };
 
 export default vueLog;
