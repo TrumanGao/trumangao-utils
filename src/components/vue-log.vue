@@ -1,6 +1,5 @@
 <template>
   <div class="vue-log">{{ text || "我是日志组件" }}</div>
- 
 </template>
 
 <script>
@@ -14,6 +13,14 @@ export default {
   },
   data() {
     return {};
+  },
+  created() {
+    this.showStore();
+  },
+  methods: {
+    showStore() {
+      console.log("展示vuex数据", this.$store);
+    }
   }
 };
 </script>
