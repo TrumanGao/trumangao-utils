@@ -1,22 +1,21 @@
 {
-  "name": "@trumangao/vue-log",
+  "name": "trumangao-ybc",
   "version": "1.0.0",
-  "description": "create localstorage as log in vue",
-  "main": "dist/vue-log.js",
+  "description": "ybc 常用函数封装",
+  "main": "dist/trumangao-ybc.js",
   "scripts": {
     "test": "npm test",
     "build": "webpack --mode production"
   },
   "keywords": [
     "vue",
-    "log",
-    "vue-log",
-    "vue-component",
-    "vue-log-component"
+    "vue.js",
+    "ybc",
+    "ybc.js"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:TrumanGao/vue-log.git"
+    "url": "git@github.com:TrumanGao/ybc.git"
   },
   "author": "TrumanGao",
   "license": "ISC",

@@ -1,40 +1,12 @@
-import vueLog from "./components/vue-log.vue";
-// 给组件配置 install 方法
-vueLog.install = Vue => {
-  Vue.component(vueLog.name, vueLog);
-  console.log("给组件配置 install 方法", vueLog);
-};
-
-export default vueLog;
+/**
+ * 函数
+ */
+const ybcUtils = require("./utils/index.js");
+module.exports = ybcUtils;
 
 /**
- * Vue.js 的插件应该暴露一个 install 方法
- * @param {*} Vue Vue 构造器
- * @param {*} options 可选的选项对象
- * @link https://cn.vuejs.org/v2/guide/plugins.html
+ * 组件
  */
-// MyPlugin.install = function (Vue, options) {
-//   // 1. 添加全局方法或 property
-//   Vue.myGlobalMethod = function () {
-//     // 逻辑...
-//   };
-
-//   // 2. 添加全局资源
-//   Vue.directive("my-directive", {
-//     bind(el, binding, vnode, oldVnode) {
-//       // 逻辑...
-//     }
-//   });
-
-//   // 3. 注入组件选项
-//   Vue.mixin({
-//     created: function () {
-//       // 逻辑...
-//     }
-//   });
-
-//   // 4. 添加实例方法
-//   Vue.prototype.$myMethod = function (methodOptions) {
-//     // 逻辑...
-//   };
-// };
+// import myComponent from "./component/my-component.vue";
+// myComponent.install = Vue => Vue.component(myComponent.name, myComponent); // 给组件配置install方法
+// export default myComponent;

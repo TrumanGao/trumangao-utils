@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/dist"), // 打包后的文件存放在dist文件夹
     publicPath: "/dist/", // 设置公共路径
-    filename: "vue-log.js", // 打包后输出文件的文件设置为btn.js
+    filename: "trumangao-ybc.js", // 打包后输出文件的文件设置为btn.js
     libraryTarget: "umd" // 这个选项会尝试把库暴露给前使用的模块定义系统，这使其和CommonJS、AMD兼容或者暴露为全局变量
   },
   module: {
