@@ -1,18 +1,18 @@
-# trumangao-ybc
+# trumangao-utils
 
-ybc 常用函数封装
+常用函数封装
 暂时仅支持 CommonJS 方式引入
 
 # install
 
 ```js
-npm install trumangao-ybc
+npm install trumangao-utils
 ```
 
 # use
 
 ```js
 // main.js
-const ybcUtils = require("trumangao-ybc");
-Vue.prototype.$_ybcUtils = ybcUtils;
+const $_gUtils = require("trumangao-utils");
+Vue.prototype.$_gUtils = $_gUtils;
 ```

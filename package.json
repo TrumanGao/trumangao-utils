@@ -1,21 +1,21 @@
 {
-  "name": "trumangao-ybc",
+  "name": "trumangao-utils",
   "version": "1.0.0",
-  "description": "ybc 常用函数封装",
-  "main": "dist/trumangao-ybc.js",
+  "description": "常用函数封装",
+  "main": "dist/trumangao-utils.js",
   "scripts": {
     "test": "npm test",
     "build": "webpack --mode production"
   },
   "keywords": [
-    "vue",
-    "vue.js",
-    "ybc",
-    "ybc.js"
+    "js",
+    "javascript",
+    "utils",
+    "utils.js"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:TrumanGao/ybc.git"
+    "url": "git@github.com:TrumanGao/trumangao-utils.git"
   },
   "author": "TrumanGao",
   "license": "ISC",
