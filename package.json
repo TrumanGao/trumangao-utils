@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "常用函数封装",
   "main": "dist/trumangao-utils.js",
+  "private": true,
   "scripts": {
     "test": "npm test",
     "build": "webpack --mode production"
