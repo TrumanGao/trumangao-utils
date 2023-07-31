@@ -1,42 +1,36 @@
 {
   "name": "trumangao-utils",
   "version": "1.0.0",
-  "description": "常用函数封装",
-  "main": "dist/trumangao-utils.js",
-  "private": true,
+  "description": "常用函数库",
+  "main": "/dist/bundle.js",
+  "types": "/dist/src/index.d.ts",
   "scripts": {
-    "test": "npm test",
-    "build": "webpack --mode production"
+    "build": "webpack",
+    "build:production": "webpack --mode production"
   },
-  "keywords": [
-    "js",
-    "javascript",
-    "utils",
-    "utils.js"
-  ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:TrumanGao/trumangao-utils.git"
+    "url": "git+https://github.com/TrumanGao/trumangao-utils.git"
   },
+  "keywords": [
+    "utils"
+  ],
   "author": "TrumanGao",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrumanGao/trumangao-utils/issues"
+  },
+  "homepage": "https://github.com/TrumanGao/trumangao-utils#readme",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "css-loader": "^1.0.0",
-    "file-loader": "^2.0.0",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^7.2.0",
-    "vue": "^2.5.2",
-    "vue-hot-reload-api": "^2.2.4",
-    "vue-html-loader": "^1.2.4",
-    "vue-loader": "^15.4.2",
-    "vue-style-loader": "^3.0.3",
-    "vue-template-compiler": "^2.5.9",
-    "webpack": "^4.19.0",
-    "webpack-cli": "^3.1.0"
+    "@types/lodash.isnull": "^3.0.7",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "lodash.isnull": "^3.0.0"
   }
 }
