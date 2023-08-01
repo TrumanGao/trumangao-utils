@@ -124,21 +124,19 @@ export function prefetchAssets(
 }
 
 /**
- * 计算字符长度
+ * 计算字符串长度
  */
-export function computedStrLen(str: string) {
-  // 获取字符串长度
-  let maxLen = 0;
+export function getCharLength(str: string) {
+  let length = 0;
   for (let i = 0; i < str.length; i++) {
     const c = str.charCodeAt(i);
-    // 单字节加1
     if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
-      maxLen++;
+      length += 1;
     } else {
-      maxLen += 2;
+      length += 2;
     }
   }
-  return maxLen;
+  return length;
 }
 
 /**
@@ -152,6 +150,58 @@ export function url2obj(url: string = window.location.search) {
     const [key, val] = qstr.split("=");
     obj[key] = decodeURIComponent(val);
   });
-  console.log("url参数解析为：", obj);
   return obj;
+}
+
+/**
+ * 过滤对象中的空值，包括空字符串、null、undefined
+ */
+export function filterEmptyValue<T extends { [key: string]: any }>(
+  obj: T,
+): Partial<T> {
+  const newObj: Partial<T> = { ...obj };
+  Object.keys(newObj).map((key) => {
+    const value = newObj[key as keyof T];
+    if (value === "" || value === null || value === undefined) {
+      delete newObj[key as keyof T];
+    }
+  });
+  return newObj;
+}
+
+/**
+ * Date类型数据 转 时间标准格式字符串
+ */
+export function date2string(
+  option: {
+    date?: Date;
+    hasTime?: boolean; // 是否包含时分秒
+    dateSeparator?: string;
+    timeSeparator?: string;
+  } = {},
+) {
+  const {
+    date = new Date(),
+    hasTime = true,
+    dateSeparator = "/",
+    timeSeparator = ":",
+  } = option;
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  let formatStr = [year, month, day]
+    .map((n) => (n.toString()[1] ? n : `0${n}`))
+    .join(dateSeparator);
+
+  if (hasTime) {
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+    formatStr = `${formatStr} ${[hour, minute, second]
+      .map((n) => (n.toString()[1] ? n : `0${n}`))
+      .join(timeSeparator)}`;
+  }
+
+  return formatStr; // YYYY/MM/DD hh:mm:ss
 }

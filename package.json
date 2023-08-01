@@ -1,12 +1,15 @@
 {
   "name": "trumangao-utils",
   "version": "1.0.0",
-  "description": "常用函数库",
-  "main": "/dist/bundle.js",
-  "types": "/dist/src/index.d.ts",
+  "description": "A series of commonly used JavaScript utility functions.",
+  "main": "dist/bundle.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
-    "build": "webpack",
-    "build:production": "webpack --mode production"
+    "build": "rimraf dist && tsc && webpack --mode production",
+    "tsc": "tsc",
+    "patch": "npm version patch",
+    "minor": "npm version minor",
+    "major": "npm version major"
   },
   "repository": {
     "type": "git",
@@ -16,7 +19,7 @@
     "utils"
   ],
   "author": "TrumanGao",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/TrumanGao/trumangao-utils/issues"
   },
