@@ -1,5 +1,6 @@
 # trumangao-utils
 
+常用JavaScript工具函数
 A series of commonly used JavaScript utility functions.
 
 ## Install
@@ -24,6 +25,8 @@ console.log(obj); // { name: "trumangao-utils", typescript: "true" }
 
 ### getStorage
 
+根据键名读取本地存储
+
 Read local storage based on the key.
 
 ```ts
@@ -34,6 +37,8 @@ function getStorage<K extends string>(
 ```
 
 ### setStorage
+
+根据键名写入本地存储
 
 Write local storage based on the key.
 
@@ -47,6 +52,8 @@ function setStorage<K extends string>(
 
 ### validateValue
 
+常见数据格式校验
+
 Common data format validation for phone, email, and numEnCn (numbers and Chinese characters).
 
 ```ts
@@ -58,6 +65,8 @@ function validateValue(option: {
 ```
 
 ### checkDataType
+
+精准判断数据类型，返回类型字符串
 
 Precisely determine the data type and return the type string.
 
@@ -83,6 +92,8 @@ function checkDataType(
 
 ### downloadBlob
 
+下载blob
+
 Download a blob.
 
 ```ts
@@ -90,6 +101,8 @@ function downloadBlob(blob: Blob, fileName?: string): void;
 ```
 
 ### prefetchAssets
+
+资源预加载
 
 Resource preloading.
 
@@ -99,6 +112,8 @@ function prefetchAssets(assets: { src: string; type: "img" | "audio" }[]): void;
 
 ### getCharLength
 
+计算字符串长度
+
 Calculate the length of a string.
 
 ```ts
@@ -106,6 +121,8 @@ function getCharLength(str: string): number;
 ```
 
 ### url2obj
+
+获取URL的参数
 
 Convert a URL to an object with query parameters.
 
@@ -115,6 +132,8 @@ function url2obj(url?: string): { [key: string]: string };
 
 ### filterEmptyValue
 
+过滤对象中的空值，包括空字符串、null、undefined
+
 Filter out empty values in an object, including empty strings, null, and undefined.
 
 ```ts
@@ -122,6 +141,8 @@ function filterEmptyValue<T extends { [key: string]: any }>(obj: T): Partial<T>;
 ```
 
 ### date2string
+
+Date类型数据 转 时间标准格式字符串
 
 Convert a Date object to a standard format string.
 
