@@ -1,7 +1,7 @@
-./.vscode
-./node_modules
-./src
-./.editorconfig
-./tsconfig.json
-./webpack.config.js
+/.vscode
+/node_modules
+/src
+/.editorconfig
+/tsconfig.json
+/webpack.config.js
 .DS_Store
