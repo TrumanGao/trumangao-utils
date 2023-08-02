@@ -9,6 +9,7 @@ import {
   url2obj,
   filterEmptyValue,
   date2string,
+  caniuse_webp,
 } from "./utils/tools";
 
 export {
@@ -22,4 +23,5 @@ export {
   url2obj,
   filterEmptyValue,
   date2string,
+  caniuse_webp,
 };

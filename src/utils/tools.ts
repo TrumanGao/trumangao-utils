@@ -205,3 +205,20 @@ export function date2string(
 
   return formatStr; // YYYY/MM/DD hh:mm:ss
 }
+
+/**
+ * 检测 webp 支持性，惰性函数
+ */
+export let caniuse_webp = () => {
+  const caniuse =
+    document
+      .createElement("canvas")
+      ?.toDataURL("image/webp")
+      .indexOf("data:image/webp") === 0;
+
+  caniuse_webp = () => {
+    return caniuse;
+  };
+
+  return caniuse;
+};

@@ -155,3 +155,13 @@ function date2string(option?: {
   timeSeparator?: string;
 }): string;
 ```
+
+### caniuse_webp
+
+检测 webp 支持性，惰性函数
+
+Detect webp support, lazy function
+
+```ts
+function caniuse_webp(): boolean;
+```
