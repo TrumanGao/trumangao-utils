@@ -12,15 +12,21 @@ export interface EventListenerMapInterface {
 }
 
 /**
+ * Management class of window eventListener and document eventListener
+ *
+ * The instance exposes the eventListenerMap property and the addEventListener and removeEventListener methods
+ * to manage the memory address of the listener to avoid memory leaks
+ *
  * window eventListener 和 document eventListener 管理类
  *
- * 实例暴露 addEventListener 和 removeEventListener 方法
+ * 实例暴露 eventListenerMap 属性和 addEventListener 和 removeEventListener 方法，
+ * 用于管理 listener 的内存地址，避免内存泄漏
  */
 export class EventListener {
   /**
-   * parent => type => listenerKey => listener 映射关系
+   * parent => type => listenerKey => listener mapping
    *
-   * 用于保存 listener 的内存地址，方便管理 listener，避免内存泄漏
+   * parent => type => listenerKey => listener 映射关系
    */
   eventListenerMap: EventListenerMapInterface = {
     window: {},
