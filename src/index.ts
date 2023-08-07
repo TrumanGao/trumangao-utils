@@ -11,6 +11,7 @@ import {
   date2string,
   caniuse_webp,
 } from "./utils/tools";
+import { EventListener } from "./utils/eventListener";
 
 export {
   getStorage,
@@ -25,3 +26,5 @@ export {
   date2string,
   caniuse_webp,
 };
+
+export { EventListener };
