@@ -6,11 +6,12 @@
   "module": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
-    "build": "rimraf dist && tsc && webpack --mode production",
+    "build": "rimraf dist && webpack --mode production && tsc",
     "tsc": "tsc",
     "patch": "npm version patch",
     "minor": "npm version minor",
-    "major": "npm version major"
+    "major": "npm version major",
+    "clean": "rimraf dist"
   },
   "repository": {
     "type": "git",
