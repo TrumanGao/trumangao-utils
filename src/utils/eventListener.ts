@@ -28,10 +28,14 @@ export class EventListener {
    *
    * parent => type => listenerKey => listener 映射关系
    */
-  eventListenerMap: EventListenerMapInterface = {
+  static eventListenerMap: EventListenerMapInterface = {
     window: {},
     document: {},
   };
+
+  get eventListenerMap(): EventListenerMapInterface {
+    return JSON.parse(JSON.stringify(EventListener.eventListenerMap));
+  }
 
   /**
    * @param type 与 window.addEventListener 或 document.addEventListener 一致
@@ -76,17 +80,17 @@ export class EventListener {
     } else {
       throw new Error("parent 参数错误，仅支持 window 和 document");
     }
-    this.eventListenerMap[parent][type] = {
-      ...this.eventListenerMap[parent][type],
+    EventListener.eventListenerMap[parent][type] = {
+      ...EventListener.eventListenerMap[parent][type],
       [listenerKey]: listener,
     };
 
     console.log(
       `eventListenerMap 新增 ${listenerKey}: `,
-      this.eventListenerMap,
+      EventListener.eventListenerMap,
     );
 
-    return this.eventListenerMap;
+    return EventListener.eventListenerMap;
   }
 
   /**
@@ -112,8 +116,8 @@ export class EventListener {
     parent: "window" | "document" = "window",
   ) {
     if (
-      !this.eventListenerMap[parent][type] ||
-      !this.eventListenerMap[parent][type][listenerKey]
+      !EventListener.eventListenerMap[parent][type] ||
+      !EventListener.eventListenerMap[parent][type][listenerKey]
     ) {
       return false;
     }
@@ -121,23 +125,23 @@ export class EventListener {
     if (parent === "window") {
       window.removeEventListener(
         type,
-        this.eventListenerMap[parent][type][listenerKey],
+        EventListener.eventListenerMap[parent][type][listenerKey],
       );
     } else if (parent === "document") {
       document.removeEventListener(
         type,
-        this.eventListenerMap[parent][type][listenerKey],
+        EventListener.eventListenerMap[parent][type][listenerKey],
       );
     } else {
       throw new Error("parent 参数错误，仅支持 window 和 document");
     }
-    delete this.eventListenerMap[parent][type][listenerKey];
+    delete EventListener.eventListenerMap[parent][type][listenerKey];
 
     console.log(
       `eventListenerMap 删除 ${listenerKey}: `,
-      this.eventListenerMap,
+      EventListener.eventListenerMap,
     );
 
-    return this.eventListenerMap;
+    return EventListener.eventListenerMap;
   }
 }
