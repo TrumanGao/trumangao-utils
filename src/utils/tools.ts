@@ -154,6 +154,17 @@ export function url2obj(url: string = window.location.search) {
 }
 
 /**
+ * 对象转URL参数
+ */
+export function obj2url(obj: { [key: string]: string } = {}) {
+  let url = "?";
+  Object.keys(obj).map((key) => {
+    url += `${key}=${encodeURIComponent(obj[key])}&`;
+  });
+  return url.slice(0, url.length - 1);
+}
+
+/**
  * 过滤对象中的空值，包括空字符串、null、undefined
  */
 export function filterEmptyValue<T extends { [key: string]: any }>(

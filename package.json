@@ -7,10 +7,10 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "rimraf dist && webpack --mode production && tsc",
-    "tsc": "tsc",
     "patch": "npm version patch",
     "minor": "npm version minor",
     "major": "npm version major",
+    "tsc": "tsc",
     "clean": "rimraf dist"
   },
   "repository": {
