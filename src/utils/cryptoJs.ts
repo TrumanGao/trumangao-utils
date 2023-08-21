@@ -1,32 +1,51 @@
 import cryptoJS from "crypto-js";
 
+/**
+ * @param key 自定义字符串，创建实例时会自动加上后缀 suffix ，并转化为32位的md5字符串
+ * @param iv 自定义字符串，创建实例时会自动加上后缀 suffix ，并转化为32位的md5字符串
+ * @param suffix 自定义字符串，key和iv的后缀，默认为"0"
+ */
 export class CryptoJS {
+  rawKey: string | number;
+  rawIv: string | number;
+  rawSuffix: string | number;
   key: cryptoJS.lib.WordArray;
   iv: cryptoJS.lib.WordArray;
 
-  constructor(key: string, iv: string) {
-    this.key = cryptoJS.enc.Utf8.parse(key);
-    this.iv = cryptoJS.enc.Utf8.parse(iv);
+  constructor({
+    key,
+    iv,
+    suffix = "0",
+  }: {
+    key: string | number;
+    iv: string | number;
+    suffix?: string | number;
+  }) {
+    this.rawKey = key;
+    this.rawIv = iv;
+    this.rawSuffix = suffix;
+    this.key = cryptoJS.MD5(`${this.rawKey}_${this.rawSuffix}`);
+    this.iv = cryptoJS.MD5(`${this.rawIv}_${this.rawSuffix}`);
   }
 
   /**
    * AES 加密
    */
-  aesEncrypt(message: string | cryptoJS.lib.WordArray) {
+  encryptAes(message: string | cryptoJS.lib.WordArray) {
     const ciphertext = cryptoJS.AES.encrypt(message, this.key, {
       iv: this.iv,
     }).toString();
-    return encodeURIComponent(ciphertext);
+    return ciphertext;
   }
 
   /**
    * AES 解密
    */
-  aesDecrypt(ciphertext: string | cryptoJS.lib.CipherParams) {
+  decryptAes(ciphertext: string | cryptoJS.lib.CipherParams) {
     const bytes = cryptoJS.AES.decrypt(ciphertext, this.key, {
       iv: this.iv,
     }).toString(cryptoJS.enc.Utf8);
-    return decodeURIComponent(bytes);
+    return bytes;
   }
 
   /**
@@ -34,8 +53,19 @@ export class CryptoJS {
    * @param message — The message to hash.
    * @param key — The secret key.
    */
-  HmacSHA1Encode(message: string | cryptoJS.lib.WordArray) {
-    return cryptoJS.HmacSHA1(message, this.key).toString();
+  encryptHmacSHA1(message: string | cryptoJS.lib.WordArray) {
+    const ciphertext = cryptoJS.HmacSHA1(message, this.key).toString();
+    return ciphertext;
+  }
+
+  /**
+   * HmacMD5 加密
+   * @param message — The message to hash.
+   * @param key — The secret key.
+   */
+  encryptHmacMD5(message: string | cryptoJS.lib.WordArray) {
+    const ciphertext = cryptoJS.HmacMD5(message, this.key).toString();
+    return ciphertext;
   }
 
   /**
