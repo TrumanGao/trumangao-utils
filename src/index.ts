@@ -12,6 +12,7 @@ import {
   date2string,
   caniuse_webp,
 } from "./utils/tools";
+import { CryptoJS } from "./utils/cryptoJs";
 import { EventListener } from "./utils/eventListener";
 
 export {
@@ -29,4 +30,4 @@ export {
   caniuse_webp,
 };
 
-export { EventListener };
+export { CryptoJS, EventListener };
