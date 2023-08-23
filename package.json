@@ -27,8 +27,6 @@
   },
   "homepage": "https://github.com/TrumanGao/trumangao-utils#readme",
   "devDependencies": {
-    "@types/crypto-js": "^4.1.1",
-    "@types/lodash.isnull": "^3.0.7",
     "eslint": "^8.45.0",
     "prettier": "^3.0.0",
     "ts-loader": "^9.4.4",
@@ -37,6 +35,8 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@types/lodash.isnull": "^3.0.7",
     "crypto-js": "^4.1.1",
     "lodash.isnull": "^3.0.0"
   }
