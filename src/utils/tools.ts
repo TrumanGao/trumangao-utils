@@ -69,7 +69,7 @@ export function validateValue(option: {
 /**
  * 精准判断数据类型，返回类型字符串
  */
-export function checkDataType(
+export function getDataType(
   data: unknown,
 ):
   | "String"

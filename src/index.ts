@@ -2,7 +2,7 @@ import {
   getStorage,
   setStorage,
   validateValue,
-  checkDataType,
+  getDataType,
   downloadBlob,
   prefetchAssets,
   getCharLength,
@@ -12,14 +12,14 @@ import {
   date2string,
   caniuse_webp,
 } from "./utils/tools";
-import { CryptoJS } from "./utils/cryptoJs";
-import { EventListener } from "./utils/eventListener";
+import { CryptoManager } from "./utils/cryptoJs";
+import { EventManager } from "./utils/eventListener";
 
 export {
   getStorage,
   setStorage,
   validateValue,
-  checkDataType,
+  getDataType,
   downloadBlob,
   prefetchAssets,
   getCharLength,
@@ -30,4 +30,4 @@ export {
   caniuse_webp,
 };
 
-export { CryptoJS, EventListener };
+export { CryptoManager, EventManager };
