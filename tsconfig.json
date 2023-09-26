@@ -1,11 +1,12 @@
 {
   "include": ["src"],
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "./dist/src/",
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "ES6",
-    "target": "ES6",
+    "target": "ES5",
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",

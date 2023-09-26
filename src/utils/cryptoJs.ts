@@ -1,4 +1,4 @@
-import CryptoJS from "crypto-js";
+import * as CryptoJS from "crypto-js";
 
 /**
  * @param key 自定义字符串，创建实例时会自动加上后缀 suffix ，并转化为32位的md5字符串
