@@ -22,4 +22,7 @@ module.exports = {
       type: "commonjs2",
     },
   },
+  externals: {
+    events: "commonjs events",
+  },
 };
