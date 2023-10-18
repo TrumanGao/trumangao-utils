@@ -237,7 +237,7 @@ export let caniuse_webp = () => {
 /**
  * 切换浏览器全屏/非全屏
  */
-export function toggleFullScreen(fullscreenOptions: FullscreenOptions) {
+export function toggleFullScreen(fullscreenOptions?: FullscreenOptions) {
   if (!document.fullscreenEnabled) {
     throw new Error(
       "Fullscreen feature not being allowed, or fullscreen mode not being supported.",
