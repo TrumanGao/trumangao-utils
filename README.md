@@ -1,8 +1,10 @@
+[Toc]
+
 # trumangao-utils
 
 常用JavaScript工具函数
 
-A series of commonly used JavaScript utility functions.
+A series of commonly used JavaScript utility functions. Here for the [API](https://github.com/TrumanGao/trumangao-utils#API).
 
 ## Install
 
@@ -12,7 +14,7 @@ npm install trumangao-utils
 
 ## Usage
 
-```js
+```ts
 import { url2obj } from "trumangao-utils";
 
 const url =
@@ -23,6 +25,40 @@ console.log(obj); // { name: "trumangao-utils", typescript: "true" }
 ```
 
 ## API
+
+### CryptoManager
+
+管理字符的加密/解密，基于 crypto-js
+
+Manage the encryption/decryption of characters, based on crypto-js.
+
+```ts
+// encryption
+import { CryptoManager } from "trumangao-utils";
+
+const cryptoManager = new CryptoManager({
+  key: "test_key",
+  iv: "test_iv",
+  suffix: "test_suffix", // optional
+});
+
+const encrypted = cryptoManager.encryptAes("this is a test string");
+```
+
+```ts
+// decryption
+import { CryptoManager } from "trumangao-utils";
+
+const cryptoManager = new CryptoManager({
+  key: "test_key",
+  iv: "test_iv",
+  suffix: "test_suffix", // optional
+});
+
+const decrypted = cryptoManager.decryptAes(encrypted);
+
+console.log(decrypted); // "this is a test string"
+```
 
 ### getStorage
 
