@@ -233,3 +233,18 @@ export let caniuse_webp = () => {
 
   return caniuse;
 };
+
+/**
+ * 切换浏览器全屏/非全屏
+ */
+export function toggleFullScreen() {
+  if (!document.fullscreenEnabled) {
+    throw new Error(
+      "Fullscreen feature not being allowed, or fullscreen mode not being supported.",
+    );
+  }
+
+  return document.fullscreenElement
+    ? document?.exitFullscreen?.().then(() => false)
+    : document.documentElement.requestFullscreen().then(() => true);
+}
