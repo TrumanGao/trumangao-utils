@@ -93,10 +93,10 @@ export class EventManager {
     };
     EventManager.eventManagerMap.set(eventEmitter, eventNameMap);
 
-    console.log(
-      `eventManagerMap 新增 ${eventListenerKey}: `,
-      eventNameMap[eventName][eventListenerKey],
-    );
+    // console.log(
+    //   `eventManagerMap 新增 ${eventListenerKey}: `,
+    //   eventNameMap[eventName][eventListenerKey],
+    // );
 
     return EventManager.eventManagerMap;
   }
@@ -158,10 +158,10 @@ export class EventManager {
     delete eventNameMap[eventName][eventListenerKey];
     EventManager.eventManagerMap.set(eventEmitter, eventNameMap);
 
-    console.log(
-      `eventManagerMap 删除 ${eventListenerKey}: `,
-      eventNameMap[eventName],
-    );
+    // console.log(
+    //   `eventManagerMap 删除 ${eventListenerKey}: `,
+    //   eventNameMap[eventName],
+    // );
 
     return EventManager.eventManagerMap;
   }
