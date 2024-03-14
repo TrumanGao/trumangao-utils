@@ -250,3 +250,35 @@ export function toggleFullScreen(fullscreenOptions?: FullscreenOptions) {
         .requestFullscreen(fullscreenOptions)
         .then(() => true);
 }
+
+/**
+ * 重试，捕获到异常时递归调用
+ * @fn 需要重试执行的函数。如果是异步函数，必须返回Promise，否则无法串行重试
+ * @count 递归次数，首次调用时传入0
+ * @options
+ * @property maxCount 最大重试次数，默认3
+ * @property delay 重试间隔，默认500ms
+ */
+export async function retryFunction<T>(
+  fn: (arg?: any) => Promise<T>,
+  count: number,
+  options: {
+    maxCount?: number;
+    delay?: number;
+  } = {},
+): Promise<T> {
+  const { maxCount = 3, delay = 500 } = options;
+
+  try {
+    const result = await fn();
+    return result;
+  } catch (error) {
+    if (count < maxCount) {
+      return new Promise((resolve) =>
+        setTimeout(() => resolve(retryFunction(fn, count + 1, options)), delay),
+      );
+    } else {
+      throw error;
+    }
+  }
+}
