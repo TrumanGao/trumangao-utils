@@ -1,5 +1,3 @@
-import isNull from "lodash.isnull";
-
 /**
  * 根据键名读取本地存储
  */
@@ -21,17 +19,29 @@ export function getStorage<K extends string>(
 
 /**
  * 根据键名写入本地存储
+ * @warn 如果是 undefined 或 null，转换为空字符串，否则会保存为 "undefined" 或 "null"
  */
 export function setStorage<K extends string>(
   storageType: "sessionStorage" | "localStorage",
   storageKey: K,
   storageData: any,
 ) {
-  if (typeof storageData === "string") {
-    window[storageType].setItem(storageKey, storageData);
-  } else {
-    window[storageType].setItem(storageKey, JSON.stringify(storageData));
+  let _storageData;
+
+  switch (getDataType(storageData)) {
+    case "Undefined":
+    case "Null":
+      _storageData = "";
+      break;
+    case "String":
+      _storageData = storageData;
+      break;
+    default:
+      _storageData = JSON.stringify(storageData);
+      break;
   }
+
+  window[storageType].setItem(storageKey, _storageData);
 }
 
 /**
@@ -47,8 +57,8 @@ export function validateValue(option: {
 }) {
   if (
     option.required &&
-    (isNull(option.value) ||
-      typeof option.value === "undefined" ||
+    (getDataType(option.value) === "Undefined" ||
+      getDataType(option.value) === "Null" ||
       option.value === "")
   ) {
     return false;
@@ -72,11 +82,11 @@ export function validateValue(option: {
 export function getDataType(
   data: unknown,
 ):
+  | "Undefined"
+  | "Null"
   | "String"
   | "Number"
   | "Boolean"
-  | "Undefined"
-  | "Null"
   | "Symbol"
   | "Function"
   | "Array"
@@ -86,8 +96,18 @@ export function getDataType(
   | "Error"
   | "Map"
   | "Set" {
-  const typeStr = Object.prototype.toString.call(data);
-  return typeStr.slice(8, typeStr.length - 1);
+  let _dataType;
+
+  if (typeof data === "undefined") {
+    _dataType = "Undefined";
+  } else if (data === null) {
+    _dataType = "Null";
+  } else {
+    const typeStr = Object.prototype.toString.call(data);
+    _dataType = typeStr.slice(8, typeStr.length - 1);
+  }
+
+  return _dataType;
 }
 
 /**

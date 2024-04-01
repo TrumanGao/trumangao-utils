@@ -37,8 +37,6 @@
   },
   "dependencies": {
     "@types/crypto-js": "^4.1.1",
-    "@types/lodash.isnull": "^3.0.7",
-    "crypto-js": "^4.1.1",
-    "lodash.isnull": "^3.0.0"
+    "crypto-js": "^4.1.1"
   }
 }
