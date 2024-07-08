@@ -168,7 +168,7 @@ export function url2obj(url: string = window.location.search) {
 
   queryStr?.split("&").map((qstr) => {
     const [key, val] = qstr.split("=");
-    obj[key] = decodeURIComponent(val);
+    obj[decodeURIComponent(key)] = decodeURIComponent(val);
   });
   return obj;
 }
@@ -179,7 +179,7 @@ export function url2obj(url: string = window.location.search) {
 export function obj2url(obj: { [key: string]: string } = {}) {
   let url = "?";
   Object.keys(obj).map((key) => {
-    url += `${key}=${encodeURIComponent(obj[key])}&`;
+    url += `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}&`;
   });
   return url.slice(0, url.length - 1);
 }
