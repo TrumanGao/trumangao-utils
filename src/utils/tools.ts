@@ -1,3 +1,5 @@
+import { UAParser } from "ua-parser-js";
+
 /**
  * 根据键名读取本地存储
  */
@@ -301,4 +303,41 @@ export async function retryFunction<T>(
       throw error;
     }
   }
+}
+
+/**
+ * 对 new UAParser().getDevice().type 二次封装，返回更准确的设备类型：
+ * 区分 mobile 和 tablet；新增 desktop
+ */
+export function getDeviceType() {
+  const deviceType = new UAParser().getDevice().type as
+    | "console"
+    | "mobile"
+    | "tablet"
+    | "smarttv"
+    | "wearable"
+    | "embedded";
+  let _deviceType: typeof deviceType | "desktop";
+
+  switch (deviceType) {
+    case "mobile":
+    case "tablet":
+      if (Math.min(window.innerWidth, window.innerHeight) >= 600) {
+        _deviceType = "tablet";
+      } else {
+        _deviceType = "mobile";
+      }
+      break;
+    case "console":
+    case "smarttv":
+    case "wearable":
+    case "embedded":
+      _deviceType = deviceType;
+      break;
+    default:
+      _deviceType = "desktop";
+      break;
+  }
+
+  return _deviceType;
 }

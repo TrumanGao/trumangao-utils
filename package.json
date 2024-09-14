@@ -28,6 +28,7 @@
   "homepage": "https://github.com/TrumanGao/trumangao-utils#readme",
   "devDependencies": {
     "@types/node": "^20.7.0",
+    "@types/ua-parser-js": "^0.7.39",
     "eslint": "^8.45.0",
     "prettier": "^3.0.0",
     "ts-loader": "^9.4.4",
@@ -37,6 +38,7 @@
   },
   "dependencies": {
     "@types/crypto-js": "^4.1.1",
-    "crypto-js": "^4.1.1"
+    "crypto-js": "^4.1.1",
+    "ua-parser-js": "^1.0.39"
   }
 }
