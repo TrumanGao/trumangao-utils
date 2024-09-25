@@ -319,13 +319,15 @@ export function getDeviceType() {
     | "embedded";
   let _deviceType: typeof deviceType | "desktop";
 
+  const isMobileSize = Math.min(window.innerWidth, window.innerHeight) < 600;
+
   switch (deviceType) {
     case "mobile":
     case "tablet":
-      if (Math.min(window.innerWidth, window.innerHeight) >= 600) {
-        _deviceType = "tablet";
-      } else {
+      if (isMobileSize) {
         _deviceType = "mobile";
+      } else {
+        _deviceType = "tablet";
       }
       break;
     case "console":
@@ -335,7 +337,17 @@ export function getDeviceType() {
       _deviceType = deviceType;
       break;
     default:
-      _deviceType = "desktop";
+      if (isMobileSize) {
+        _deviceType = "mobile";
+      } else if (
+        "ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0
+      ) {
+        _deviceType = "tablet";
+      } else {
+        _deviceType = "desktop";
+      }
       break;
   }
 
