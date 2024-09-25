@@ -339,11 +339,7 @@ export function getDeviceType() {
     default:
       if (isMobileSize) {
         _deviceType = "mobile";
-      } else if (
-        "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
-      ) {
+      } else if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
         _deviceType = "tablet";
       } else {
         _deviceType = "desktop";
