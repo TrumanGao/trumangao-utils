@@ -1,6 +1,6 @@
 {
   "name": "trumangao-utils",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "A series of commonly used JavaScript utility functions.",
   "main": "dist/bundle.js",
   "module": "dist/src/index.js",
