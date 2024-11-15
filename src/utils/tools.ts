@@ -310,7 +310,8 @@ export async function retryFunction<T>(
  * 区分 mobile 和 tablet；新增 desktop
  */
 export function getDeviceType() {
-  const deviceType = new UAParser().getDevice().type as
+  const uaResult = new UAParser().getResult();
+  const deviceType = uaResult.device.type as
     | "console"
     | "mobile"
     | "tablet"
@@ -319,30 +320,30 @@ export function getDeviceType() {
     | "embedded";
   let _deviceType: typeof deviceType | "desktop";
 
-  const isMobileSize = Math.min(window.innerWidth, window.innerHeight) < 600;
+  const isMobileSize = Math.min(window.innerWidth, window.innerHeight) < 450;
+  // 1920x1080 高清
+  // 1366x768 一般
+  const isDesktopSize = Math.min(window.innerWidth, window.innerHeight) > 1366;
+  const isTouchable = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   switch (deviceType) {
-    case "mobile":
-    case "tablet":
-      if (isMobileSize) {
-        _deviceType = "mobile";
-      } else {
-        _deviceType = "tablet";
-      }
-      break;
     case "console":
     case "smarttv":
     case "wearable":
     case "embedded":
       _deviceType = deviceType;
       break;
+    case "mobile":
+    case "tablet":
+      _deviceType = isMobileSize ? "mobile" : "tablet";
+      break;
     default:
-      if (isMobileSize) {
-        _deviceType = "mobile";
-      } else if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
-        _deviceType = "tablet";
-      } else {
+      if (isDesktopSize || !isTouchable) {
         _deviceType = "desktop";
+      } else if (isMobileSize) {
+        _deviceType = "mobile";
+      } else {
+        _deviceType = "tablet";
       }
       break;
   }
