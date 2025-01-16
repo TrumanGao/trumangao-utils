@@ -10,7 +10,7 @@ export function getStorage<D = unknown>(
   const storage = window[storageType].getItem(storageKey) as D;
   if (storage) {
     try {
-      return JSON.parse(storage);
+      return JSON.parse(storage as any);
     } catch (error) {
       return storage;
     }
