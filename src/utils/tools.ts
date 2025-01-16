@@ -3,11 +3,11 @@ import { UAParser } from "ua-parser-js";
 /**
  * 根据键名读取本地存储
  */
-export function getStorage<K extends string>(
+export function getStorage<D = unknown>(
   storageType: "sessionStorage" | "localStorage",
-  storageKey: K,
-) {
-  const storage = window[storageType].getItem(storageKey);
+  storageKey: string,
+): D | null {
+  const storage = window[storageType].getItem(storageKey) as D;
   if (storage) {
     try {
       return JSON.parse(storage);
@@ -15,7 +15,7 @@ export function getStorage<K extends string>(
       return storage;
     }
   } else {
-    return "";
+    return null;
   }
 }
 
