@@ -1,8 +1,8 @@
+English | [中文](./README.zh.md)
+
 # trumangao-utils
 
-常用JavaScript工具函数
-
-A series of commonly used JavaScript utility functions. Here for the [API](https://github.com/TrumanGao/trumangao-utils#API).
+Commonly used JavaScript utility functions.
 
 ## Install
 
@@ -10,110 +10,60 @@ A series of commonly used JavaScript utility functions. Here for the [API](https
 npm install trumangao-utils
 ```
 
-## Usage
+## Documentation
 
-```ts
-import { url2obj } from "trumangao-utils";
-
-const url =
-  "https://www.npmjs.com/package/trumangao-utils?name=trumangao-utils&ltypescript=true";
-const obj = url2obj(url);
-
-console.log(obj); // { name: "trumangao-utils", typescript: "true" }
-```
-
-## API
-
-### CryptoManager
-
-管理字符的加密/解密，基于 crypto-js
-
-Manage the encryption/decryption of characters, based on crypto-js.
-
-```ts
-// encryption
-import { CryptoManager } from "trumangao-utils";
-
-const cryptoManager = new CryptoManager({
-  key: "test_key",
-  iv: "test_iv",
-  suffix: "test_suffix", // optional
-});
-
-const encrypted = cryptoManager.encryptAes("this is a test string");
-```
-
-```ts
-// decryption
-import { CryptoManager } from "trumangao-utils";
-
-const cryptoManager = new CryptoManager({
-  key: "test_key",
-  iv: "test_iv",
-  suffix: "test_suffix", // optional
-});
-
-const decrypted = cryptoManager.decryptAes(encrypted);
-
-console.log(decrypted); // "this is a test string"
-```
-
-### getStorage
-
-根据键名读取本地存储
-
-Read local storage based on the key.
-
-```ts
-function getStorage<K extends string>(
+```typescript
+/**
+ * Retrieves data from storage by key.
+ * @param storageType - The type of storage ("sessionStorage" or "localStorage").
+ * @param storageKey - The key of the stored data.
+ * @returns The parsed data or null if not found.
+ */
+declare function getStorage<D = unknown>(
   storageType: "sessionStorage" | "localStorage",
-  storageKey: K,
-): any;
-```
+  storageKey: string,
+): D | null;
 
-### setStorage
-
-根据键名写入本地存储
-
-Write local storage based on the key.
-
-```ts
-function setStorage<K extends string>(
+/**
+ * Stores data in storage by key.
+ * @param storageType - The type of storage ("sessionStorage" or "localStorage").
+ * @param storageKey - The key to store the data under.
+ * @param storageData - The data to store.
+ * @warn If the data is undefined or null, it will be converted to an empty string.
+ */
+declare function setStorage<K extends string>(
   storageType: "sessionStorage" | "localStorage",
   storageKey: K,
   storageData: any,
 ): void;
-```
 
-### validateValue
-
-常见数据格式校验
-
-Common data format validation for phone, email, and numEnCn (numbers and Chinese characters).
-
-```ts
-function validateValue(option: {
+/**
+ * Validates common data formats.
+ * @param option - The validation options.
+ * @param option.type - The type of data to validate ("phone", "email", "numEnCn").
+ * @param option.value - The value to validate.
+ * @param option.required - Whether the value is required.
+ * @returns True if the value is valid, false otherwise.
+ */
+declare function validateValue(option: {
   type: "phone" | "email" | "numEnCn";
   value: any;
   required?: boolean;
 }): boolean;
-```
 
-### checkDataType
-
-精准判断数据类型，返回类型字符串
-
-Precisely determine the data type and return the type string.
-
-```ts
-function checkDataType(
+/**
+ * Determines the precise data type of a value.
+ * @param data - The data to check.
+ * @returns The data type as a string.
+ */
+declare function getDataType(
   data: unknown,
 ):
+  | "Undefined"
+  | "Null"
   | "String"
   | "Number"
   | "Boolean"
-  | "Undefined"
-  | "Null"
   | "Symbol"
   | "Function"
   | "Array"
@@ -123,79 +73,118 @@ function checkDataType(
   | "Error"
   | "Map"
   | "Set";
-```
 
-### downloadBlob
+/**
+ * Initiates a download of a Blob object.
+ * @param blob - The Blob object to download.
+ * @param fileName - The name of the file to save as.
+ */
+declare function downloadBlob(blob: Blob, fileName?: string): void;
 
-下载blob
+/**
+ * Preloads assets such as images and audio.
+ * @param assets - The assets to preload.
+ */
+declare function prefetchAssets(
+  assets: {
+    src: string;
+    type: "img" | "audio";
+  }[],
+): void;
 
-Download a blob.
+/**
+ * Calculates the length of a string, considering double-byte characters.
+ * @param str - The string to measure.
+ * @returns The length of the string.
+ */
+declare function getCharLength(str: string): number;
 
-```ts
-function downloadBlob(blob: Blob, fileName?: string): void;
-```
+/**
+ * Parses URL parameters into an object.
+ * @param url - The URL to parse.
+ * @returns An object containing the URL parameters.
+ */
+declare function url2obj(url?: string): {
+  [key: string]: string;
+};
 
-### prefetchAssets
+/**
+ * Converts an object to URL parameters.
+ * @param obj - The object to convert.
+ * @returns A string of URL parameters.
+ */
+declare function obj2url(obj?: { [key: string]: string }): string;
 
-资源预加载
+/**
+ * Filters out empty values from an object, including empty strings, null, and undefined.
+ * @param obj - The object to filter.
+ * @returns A new object with empty values removed.
+ */
+declare function filterEmptyValue<
+  T extends {
+    [key: string]: any;
+  },
+>(obj: T): Partial<T>;
 
-Resource preloading.
-
-```ts
-function prefetchAssets(assets: { src: string; type: "img" | "audio" }[]): void;
-```
-
-### getCharLength
-
-计算字符串长度
-
-Calculate the length of a string.
-
-```ts
-function getCharLength(str: string): number;
-```
-
-### url2obj
-
-获取URL的参数
-
-Convert a URL to an object with query parameters.
-
-```ts
-function url2obj(url?: string): { [key: string]: string };
-```
-
-### filterEmptyValue
-
-过滤对象中的空值，包括空字符串、null、undefined
-
-Filter out empty values in an object, including empty strings, null, and undefined.
-
-```ts
-function filterEmptyValue<T extends { [key: string]: any }>(obj: T): Partial<T>;
-```
-
-### date2string
-
-Date类型数据 转 时间标准格式字符串
-
-Convert a Date object to a standard format string.
-
-```ts
-function date2string(option?: {
+/**
+ * Converts a Date object to a formatted string.
+ * @param option - The formatting options.
+ * @param option.date - The date to format.
+ * @param option.hasTime - Whether to include the time.
+ * @param option.dateSeparator - The separator for the date.
+ * @param option.timeSeparator - The separator for the time.
+ * @returns The formatted date string.
+ */
+declare function date2string(option?: {
   date?: Date;
   hasTime?: boolean;
   dateSeparator?: string;
   timeSeparator?: string;
 }): string;
-```
 
-### caniuse_webp
+/**
+ * Checks if the browser supports WebP images. This is a lazy function.
+ * @returns True if WebP is supported, false otherwise.
+ */
+declare let caniuse_webp: () => boolean;
 
-检测 webp 支持性，惰性函数
+/**
+ * Toggles the browser's fullscreen mode.
+ * @param fullscreenOptions - The options for fullscreen mode.
+ * @returns A promise that resolves to true if entering fullscreen, false if exiting.
+ */
+declare function toggleFullScreen(
+  fullscreenOptions?: FullscreenOptions,
+): Promise<boolean>;
 
-Detect webp support, lazy function
+/**
+ * Retries a function upon failure, with a delay between attempts.
+ * @param fn - The function to retry. If asynchronous, it must return a Promise.
+ * @param count - The current retry count.
+ * @param options - The retry options.
+ * @param options.maxCount - The maximum number of retries.
+ * @param options.delay - The delay between retries in milliseconds.
+ * @returns A promise that resolves to the function's result or rejects after max retries.
+ */
+declare function retryFunction<T>(
+  fn: (arg?: any) => Promise<T>,
+  count: number,
+  options?: {
+    maxCount?: number;
+    delay?: number;
+  },
+): Promise<T>;
 
-```ts
-function caniuse_webp(): boolean;
+/**
+ * Determines the device type more accurately by distinguishing between mobile and tablet, and adding desktop.
+ * @returns The device type as a string.
+ */
+declare function getDeviceType():
+  | "console"
+  | "mobile"
+  | "smarttv"
+  | "tablet"
+  | "wearable"
+  | "embedded"
+  | "desktop";
 ```

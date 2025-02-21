@@ -1,7 +1,10 @@
 import { UAParser } from "ua-parser-js";
 
 /**
- * 根据键名读取本地存储
+ * Retrieves data from storage by key.
+ * @param storageType - The type of storage ("sessionStorage" or "localStorage").
+ * @param storageKey - The key of the stored data.
+ * @returns The parsed data or null if not found.
  */
 export function getStorage<D = unknown>(
   storageType: "sessionStorage" | "localStorage",
@@ -20,8 +23,11 @@ export function getStorage<D = unknown>(
 }
 
 /**
- * 根据键名写入本地存储
- * @warn 如果是 undefined 或 null，转换为空字符串，否则会保存为 "undefined" 或 "null"
+ * Stores data in storage by key.
+ * @param storageType - The type of storage ("sessionStorage" or "localStorage").
+ * @param storageKey - The key to store the data under.
+ * @param storageData - The data to store.
+ * @warn If the data is undefined or null, it will be converted to an empty string.
  */
 export function setStorage<K extends string>(
   storageType: "sessionStorage" | "localStorage",
@@ -47,10 +53,12 @@ export function setStorage<K extends string>(
 }
 
 /**
- * 常见数据格式校验
- * phone 手机号
- * email 邮箱
- * numEnCn 数字及中英文
+ * Validates common data formats.
+ * @param option - The validation options.
+ * @param option.type - The type of data to validate ("phone", "email", "numEnCn").
+ * @param option.value - The value to validate.
+ * @param option.required - Whether the value is required.
+ * @returns True if the value is valid, false otherwise.
  */
 export function validateValue(option: {
   type: "phone" | "email" | "numEnCn";
@@ -74,12 +82,14 @@ export function validateValue(option: {
     case "numEnCn":
       return /^[0-9a-zA-Z\u4e00-\u9fa5]+$/.test(option.value);
     default:
-      throw new Error("请传入正确的校验类型参数");
+      throw new Error("Please provide a valid validation type.");
   }
 }
 
 /**
- * 精准判断数据类型，返回类型字符串
+ * Determines the precise data type of a value.
+ * @param data - The data to check.
+ * @returns The data type as a string.
  */
 export function getDataType(
   data: unknown,
@@ -113,9 +123,11 @@ export function getDataType(
 }
 
 /**
- * 下载blob
+ * Initiates a download of a Blob object.
+ * @param blob - The Blob object to download.
+ * @param fileName - The name of the file to save as.
  */
-export function downloadBlob(blob: Blob, fileName = "下载文件") {
+export function downloadBlob(blob: Blob, fileName = "download") {
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = fileName;
@@ -124,7 +136,8 @@ export function downloadBlob(blob: Blob, fileName = "下载文件") {
 }
 
 /**
- * 资源预加载
+ * Preloads assets such as images and audio.
+ * @param assets - The assets to preload.
  */
 export function prefetchAssets(
   assets: { src: string; type: "img" | "audio" }[],
@@ -146,7 +159,9 @@ export function prefetchAssets(
 }
 
 /**
- * 计算字符串长度
+ * Calculates the length of a string, considering double-byte characters.
+ * @param str - The string to measure.
+ * @returns The length of the string.
  */
 export function getCharLength(str: string) {
   let length = 0;
@@ -162,7 +177,9 @@ export function getCharLength(str: string) {
 }
 
 /**
- * 获取URL的参数
+ * Parses URL parameters into an object.
+ * @param url - The URL to parse.
+ * @returns An object containing the URL parameters.
  */
 export function url2obj(url: string = window.location.search) {
   const obj: { [key: string]: string } = {};
@@ -176,7 +193,9 @@ export function url2obj(url: string = window.location.search) {
 }
 
 /**
- * 对象转URL参数
+ * Converts an object to URL parameters.
+ * @param obj - The object to convert.
+ * @returns A string of URL parameters.
  */
 export function obj2url(obj: { [key: string]: string } = {}) {
   let url = "?";
@@ -187,7 +206,9 @@ export function obj2url(obj: { [key: string]: string } = {}) {
 }
 
 /**
- * 过滤对象中的空值，包括空字符串、null、undefined
+ * Filters out empty values from an object, including empty strings, null, and undefined.
+ * @param obj - The object to filter.
+ * @returns A new object with empty values removed.
  */
 export function filterEmptyValue<T extends { [key: string]: any }>(
   obj: T,
@@ -203,12 +224,18 @@ export function filterEmptyValue<T extends { [key: string]: any }>(
 }
 
 /**
- * Date类型数据 转 时间标准格式字符串
+ * Converts a Date object to a formatted string.
+ * @param option - The formatting options.
+ * @param option.date - The date to format.
+ * @param option.hasTime - Whether to include the time.
+ * @param option.dateSeparator - The separator for the date.
+ * @param option.timeSeparator - The separator for the time.
+ * @returns The formatted date string.
  */
 export function date2string(
   option: {
     date?: Date;
-    hasTime?: boolean; // 是否包含时分秒
+    hasTime?: boolean;
     dateSeparator?: string;
     timeSeparator?: string;
   } = {},
@@ -240,7 +267,8 @@ export function date2string(
 }
 
 /**
- * 检测 webp 支持性，惰性函数
+ * Checks if the browser supports WebP images. This is a lazy function.
+ * @returns True if WebP is supported, false otherwise.
  */
 export let caniuse_webp = () => {
   const caniuse =
@@ -257,7 +285,9 @@ export let caniuse_webp = () => {
 };
 
 /**
- * 切换浏览器全屏/非全屏
+ * Toggles the browser's fullscreen mode.
+ * @param fullscreenOptions - The options for fullscreen mode.
+ * @returns A promise that resolves to true if entering fullscreen, false if exiting.
  */
 export function toggleFullScreen(fullscreenOptions?: FullscreenOptions) {
   if (!document.fullscreenEnabled) {
@@ -274,12 +304,13 @@ export function toggleFullScreen(fullscreenOptions?: FullscreenOptions) {
 }
 
 /**
- * 重试，捕获到异常时递归调用
- * @fn 需要重试执行的函数。如果是异步函数，必须返回Promise，否则无法串行重试
- * @count 递归次数，首次调用时传入0
- * @options
- * @property maxCount 最大重试次数，默认3
- * @property delay 重试间隔，默认500ms
+ * Retries a function upon failure, with a delay between attempts.
+ * @param fn - The function to retry. If asynchronous, it must return a Promise.
+ * @param count - The current retry count.
+ * @param options - The retry options.
+ * @param options.maxCount - The maximum number of retries.
+ * @param options.delay - The delay between retries in milliseconds.
+ * @returns A promise that resolves to the function's result or rejects after max retries.
  */
 export async function retryFunction<T>(
   fn: (arg?: any) => Promise<T>,
@@ -306,8 +337,8 @@ export async function retryFunction<T>(
 }
 
 /**
- * 对 new UAParser().getDevice().type 二次封装，返回更准确的设备类型：
- * 区分 mobile 和 tablet；新增 desktop
+ * Determines the device type more accurately by distinguishing between mobile and tablet, and adding desktop.
+ * @returns The device type as a string.
  */
 export function getDeviceType() {
   const uaResult = new UAParser().getResult();
@@ -321,8 +352,8 @@ export function getDeviceType() {
   let _deviceType: typeof deviceType | "desktop";
 
   const isMobileSize = Math.min(window.innerWidth, window.innerHeight) < 450;
-  // 1920x1080 高清
-  // 1366x768 一般
+  // 1920x1080 HD
+  // 1366x768 Standard
   const isDesktopSize = Math.min(window.innerWidth, window.innerHeight) > 1366;
   const isTouchable = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 

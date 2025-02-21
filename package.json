@@ -1,7 +1,7 @@
 {
   "name": "trumangao-utils",
   "version": "2.3.5",
-  "description": "A series of commonly used JavaScript utility functions.",
+  "description": "Commonly used JavaScript utility functions.",
   "main": "dist/bundle.js",
   "module": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
