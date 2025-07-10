@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/TrumanGao/trumangao-utils#readme",
   "devDependencies": {
+    "@types/ali-oss": "^6.16.11",
     "@types/node": "^20.7.0",
     "@types/ua-parser-js": "^0.7.39",
     "eslint": "^8.45.0",
@@ -38,6 +39,7 @@
   },
   "dependencies": {
     "@types/crypto-js": "^4.1.1",
+    "ali-oss": "^6.23.0",
     "crypto-js": "^4.1.1",
     "ua-parser-js": "^1.0.39"
   }
